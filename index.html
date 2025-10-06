@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DIU Transport System - Find bus routes and schedules for Daffodil International University">
+    <title>DIU Transport System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div id="loading-overlay" aria-live="polite" aria-label="Loading">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+            <div class="loader-text">DIU Transport System</div>
+        </div>
+    </div>
+
+    <div class="background-image" role="img" aria-label="DIU Campus Background"></div>
+    
+    <header class="header animate__animated animate__fadeInDown">
+    <div class="logo-container">
+        <a href="#home" id="home-logo-link" aria-label="Home">
+            <img src="https://daffodilvarsity.edu.bd/template/images/diulogoside.png" alt="DIU Logo" class="logo">
+        </a>
+    </div>
+    <nav class="nav" aria-label="Main navigation">
+        <!-- REMOVED: <button class="mobile-menu-toggle">...</button> -->
+        <ul class="nav-list" id="nav-list">
+            <li class="nav-item"><a href="#home" class="nav-link active"><i class="fas fa-home"></i> <span>Home</span></a></li>
+            <li class="nav-item"><a href="#about" class="nav-link"><i class="fas fa-info-circle"></i> <span>About</span></a></li>
+            <li class="nav-item"><a href="#services" class="nav-link"><i class="fas fa-bus"></i> <span>Services</span></a></li>
+            <li class="nav-item"><a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> <span>Contact</span></a></li>
+            <li class="nav-item"><a href="#admin" class="nav-link admin-nav-link"><i class="fas fa-user-shield"></i> <span>Admin</span></a></li>
+            <li class="nav-item"><button id="login-btn" class="login-btn"><i class="fas fa-user"></i> <span>Login</span></button></li>
+        </ul>
+    </nav>
+</header>
+    <main class="main-content">
+        <section id="home" class="section active-section animate__animated animate__fadeIn">
+            <div class="home-content">
+                <div class="search-container">
+                    <div class="search-box">
+                        <h1 class="search-title">Find Your DIU Bus</h1>
+                        <form id="bus-search" class="search-form">
+                            <div class="form-group">
+                                <label for="route" class="form-label"><i class="fas fa-route"></i> Select Route</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-location-arrow" aria-hidden="true"></i>
+                                    <select id="route" class="form-select" required aria-required="true">
+                                        <option value="">Choose Route</option>
+                                        <option value="dhanmondi">Dhanmondi ↔ DSC</option>
+                                        <option value="uttara">Uttara ↔ Rajlokkhi ↔ DSC</option>
+                                        <option value="baipail">Baipail ↔ Nabinagar ↔ C&B ↔ DSC</option>
+                                        <option value="dhamrai">Dhamrai Bus Stand ↔ Nabinagar ↔ C&B ↔ DSC</option>
+                                        <option value="savar">Savar ↔ C&B ↔ DSC</option>
+                                        <option value="narayanganj">Narayanganj Chasara ↔ Dhanmondi ↔ DSC</option>
+                                        <option value="green">Green Model Town ↔ Mugdha ↔ Malibag ↔ Rampura ↔ DSC</option>
+                                        <option value="sony">Sony Cinema Hall ↔ DSC</option>
+                                        <option value="uttara-moylar">Uttara Moylar Mor ↔ DSC</option>
+                                        <option value="tongi">Tongi College gate ↔ DSC</option>
+                                        <option value="konabari">Konabari Pukur Par ↔ Zirabo ↔ Ashulia Bazar ↔ DSC</option>
+                                        <option value="ecb">ECB Chattor ↔ Mirpur ↔ DSC</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="bus-type" class="form-label"><i class="fas fa-bus"></i> Bus Type</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-tags" aria-hidden="true"></i>
+                                    <select id="bus-type" class="form-select" required aria-required="true">
+                                        <option value="">Select Type</option>
+                                        <option value="student">Student Bus</option>
+                                        <option value="faculty">Faculty Bus</option>
+                                        <option value="female">Female Special</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="time" class="form-label"><i class="fas fa-clock"></i> Pickup Time</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+                                    <select id="time" class="form-select" required aria-required="true">
+                                        <option value="">Select Time</option>
+                                        <optgroup label="From DSC Campus">
+                                            <option value="11:00 AM">11:00 AM</option>
+                                            <option value="1:00 PM">1:00 PM</option>
+                                            <option value="4:00 PM">4:00 PM</option>
+                                            <option value="6:00 PM">6:00 PM</option>
+                                        </optgroup>
+                                        <optgroup label="To DSC Campus">
+                                            <option value="7:00 AM">7:00 AM</option>
+                                            <option value="10:00 AM">10:00 AM</option>
+                                            <option value="2:30 PM">2:30 PM</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="search-btn animate__animated animate__pulse animate__infinite">
+                                <i class="fas fa-search"></i> Search Buses
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="about" class="section">
+            <div class="section-content about-section-content">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </section>
+        
+        <section id="services" class="section">
+            <div class="section-content services-section-content">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </section>
+        
+        <section id="contact" class="section">
+            <div class="section-content contact-section-content">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </section>
+        
+        <section id="admin" class="section">
+            <div class="section-content admin-section-content">
+                <!-- Admin dashboard will be loaded dynamically -->
+            </div>
+        </section>
+    </main>
+    
+    <!-- Bus Details Modal -->
+    <div class="modal" id="bus-modal" role="dialog" aria-modal="true" aria-labelledby="bus-modal-title">
+        <div class="modal-content animate__animated animate__zoomIn">
+            <button class="close-modal" aria-label="Close modal">×</button>
+            <div id="modal-data"></div>
+        </div>
+    </div>
+    
+    <!-- No Bus Found Modal -->
+    <div class="modal" id="no-bus-modal" role="dialog" aria-modal="true" aria-labelledby="no-bus-title">
+        <div class="modal-content animate__animated animate__zoomIn">
+            <button class="close-modal" aria-label="Close modal">×</button>
+            <div class="no-bus-message">
+                <i class="fas fa-bus-slash" aria-hidden="true"></i>
+                <h3 id="no-bus-title">No Buses Available</h3>
+                <p>Sorry, no buses found matching your criteria. Please try different options.</p>
+                <button class="btn try-again-btn animate__animated animate__pulse animate__infinite">Try Again</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+        <div class="modal-content animate__animated animate__zoomIn">
+            <button class="close-modal" aria-label="Close modal">×</button>
+            <div class="auth-container">
+                <div class="auth-header">
+                    <img src="https://daffodilvarsity.edu.bd/template/images/diulogoside.png" alt="DIU Logo" class="auth-logo">
+                    <h3 id="auth-title">DIU Transport Portal</h3>
+                </div>
+                
+                <!-- Login Form -->
+                <div id="login-form-container" class="auth-form-container">
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-email" class="sr-only">Email Address</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                <input type="email" id="login-email" placeholder="Email Address" required aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password" class="sr-only">Password</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock" aria-hidden="true"></i>
+                                <input type="password" id="login-password" placeholder="Password" required aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-options">
+                            <div class="remember-me">
+                                <input type="checkbox" id="remember-me">
+                                <label for="remember-me">Remember me</label>
+                            </div>
+                            <a href="#" id="forgot-password-link" class="forgot-password">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="auth-submit-btn animate__animated animate__pulse animate__infinite">
+                            <i class="fas fa-sign-in-alt" aria-hidden="true"></i> Login
+                        </button>
+                        <div class="auth-switch">
+                            <p>Don't have an account? <a href="#" id="register-link" class="auth-switch-link">Register Now</a></p>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Registration Form -->
+                <div id="register-form-container" class="auth-form-container" style="display: none;">
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label for="register-name" class="sr-only">Full Name</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-user" aria-hidden="true"></i>
+                                <input type="text" id="register-name" placeholder="Full Name" required aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email" class="sr-only">Email Address</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                <input type="email" id="register-email" placeholder="Email Address" required aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-phone" class="sr-only">Phone Number</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-phone" aria-hidden="true"></i>
+                                <input type="tel" id="register-phone" placeholder="Phone Number" required aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password" class="sr-only">Password</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock" aria-hidden="true"></i>
+                                <input type="password" id="register-password" placeholder="Password" required aria-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-confirm-password" class="sr-only">Confirm Password</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock" aria-hidden="true"></i>
+                                <input type="password" id="register-confirm-password" placeholder="Confirm Password" required aria-required="true">
+                            </div>
+                        </div>
+                        <button type="submit" class="auth-submit-btn animate__animated animate__pulse animate__infinite">
+                            <i class="fas fa-user-plus" aria-hidden="true"></i> Register
+                        </button>
+                        <div class="auth-switch">
+                            <p>Already have an account? <a href="#" id="login-link" class="auth-switch-link">Login</a></p>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Forgot Password Form -->
+                <div id="forgot-password-form-container" class="auth-form-container" style="display: none;">
+                    <form id="forgot-password-form">
+                        <div class="form-group">
+                            <label for="forgot-email" class="sr-only">Email Address</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                <input type="email" id="forgot-email" placeholder="Email Address" required aria-required="true">
+                            </div>
+                        </div>
+                        <button type="submit" class="auth-submit-btn animate__animated animate__pulse animate__infinite">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i> Reset Password
+                        </button>
+                        <div class="auth-switch">
+                            <p>Remember your password? <a href="#" id="back-to-login-link" class="auth-switch-link">Back to Login</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Admin Bus Form Modal -->
+    <div class="modal" id="admin-bus-modal" role="dialog" aria-modal="true" aria-labelledby="admin-bus-modal-title">
+        <div class="modal-content animate__animated animate__zoomIn">
+            <button class="close-modal" aria-label="Close modal">×</button>
+            <div id="admin-bus-form-container"></div>
+        </div>
+    </div>
+    
+    <footer class="footer animate__animated animate__fadeInUp" id="main-footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://web.facebook.com/daffodilvarsity.edu.bd" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/daffodil.university/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/school/daffodil-international-university" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p>© 2024 Daffodil International University. All Rights Reserved.</p>
+            <p class="credits">Developed with <i class="fas fa-heart" aria-hidden="true"></i> by <a href="https://www.linkedin.com/in/mdraselhossain29/" target="_blank" rel="noopener noreferrer">Md. Rasel Hossain</a> & <a href="https://www.linkedin.com/in/khrahul73/" target="_blank" rel="noopener noreferrer">Md Kaysar Habib Rahul</a></p>
+        </div>
+    </footer>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "$uid === auth.uid || root.child('admins').child(auth.uid).exists()",
+        ".write": "$uid === auth.uid || root.child('admins').child(auth.uid).exists()",
+        ".validate": "newData.hasChildren(['name', 'email', 'phone', 'createdAt'])"
+      }
+    },
+    "admins": {
+      ".read": "auth != null",
+      ".write": "root.child('admins').child(auth.uid).exists()",
+      "$adminId": {
+        ".validate": "newData.isBoolean()"
+      }
+    },
+    "buses": {
+      ".read": "auth != null",
+      ".write": "root.child('admins').child(auth.uid).exists()",
+      "$busId": {
+        ".validate": "newData.hasChildren(['name', 'type', 'route', 'registration', 'driver', 'helper', 'phone', 'ac', 'schedule'])"
+      }
+    },
+    "bookings": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      "$bookingId": {
+        ".read": "data.child('userId').val() === auth.uid || root.child('admins').child(auth.uid).exists()",
+        ".write": "data.child('userId').val() === auth.uid || root.child('admins').child(auth.uid).exists()",
+        ".validate": "newData.hasChildren(['userId', 'userEmail', 'busId', 'time', 'status', 'createdAt'])",
+        "status": {
+          ".write": "root.child('admins').child(auth.uid).exists()"
+        }
+      }
+    },
+    "analytics": {
+      ".read": "root.child('admins').child(auth.uid).exists()",
+      ".write": "root.child('admins').child(auth.uid).exists()"
+    }
+  }
+}
